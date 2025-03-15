@@ -56,6 +56,13 @@ except:
 st.title("Email/SMS Spam Classifier")
 
 input_sms = st.text_area("Enter the message")
+from sklearn.utils.validation import check_is_fitted
+
+try:
+    check_is_fitted(tfidf)
+except:
+    st.error("Error: The TF-IDF vectorizer is not fitted. Retrain and save it before using the app.")
+    st.stop()
 
 if st.button('Predict'):
     if input_sms.strip() == "":
